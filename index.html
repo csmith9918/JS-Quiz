@@ -16,10 +16,22 @@ compares the response from the player to the ansnwers in the array.
 
 We use the prompt to ask the question and a conditional statement to see if the
 answer was guessed correctly. 
+
+
 -->
 <title>Quiz</title>
 </head>
 <body>
+
+<h1>Javascript Quiz</h1>
+
+<div id = "numCorrect">
+	
+</div>
+
+<div id = "report">
+	
+</div>
 
 
 </body>
@@ -32,6 +44,8 @@ answer was guessed correctly.
 	['What is my favorite ice cream flavor?', 'Superman']
 	];	
 
+	var correctQuestions = []; // Empty array. Will push correct answers here for report
+	var incorrectQuestions = []; // Empty array. Will push incorrect answers here for report
 	var correct = 0;
 	var wrong = 0;
 	var question;
@@ -39,24 +53,47 @@ answer was guessed correctly.
 	var response;
 	var html;
 	
+	// Creating the html display functions
 	function print(message) {
-		document.write(message);
+		var outputDiv = document.getElementById('numCorrect');
+		outputDiv.innerHTML = message;
 	}
 
+	// Builds an ordered list for the report
+	function buildList(arr) {
+		var listHTML = '<ol>';
+			for(var i = 0; i < arr.length; i +=1) {
+				listHTML += '<li>' + arr[i] + '</li>';
+			}
+			listHTML += '</ol>';
+			return listHTML;
+		}
+
+	// Iterate through the quiz array for each questions
 	for(i=0; i < quiz.length; i+=1) {
 
-		question = quiz[i][0];
-		answer = quiz[i][1];
+		question = quiz[i][0]; //store the questions in a variable
+		answer = quiz[i][1]; //store the answers in a variable
 
-		response = prompt(question);
+		response = prompt(question); // Create a prompt to the user with only the question
 
+		//Conditional logic
 		if (response === answer) {
 		correct+=1;
-
+		correctQuestions.push(question); // Push the correct answers to the array
+		}
+		else {
+			incorrectQuestions.push(question); // Push the incorrect answers to the array
 		}
 	}
 
-	html = "You got " + correct;
+
+	// Output the results here and pass them to the above functions.
+	html = "You got " + correct + " correct.";
+	html += '<h2> You got these questions correct:</h2> ';
+	html += buildList(correctQuestions);
+	html += '<h2> You got questions wrong:</h2>';
+	html += buildList(incorrectQuestions);
 	print(html);
 
 	
