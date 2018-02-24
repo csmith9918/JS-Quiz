@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--
+This program asks a series of question and evaluates each answer.
+The program keeps track of the number of questions guessed correctly
+and displays that number to the user. It also displays the number
+of questions the player got wrong.
+
+Uses a two dimensional array to hold the questions and the answers.
+Each element of the array represents one question and is itself
+an array composed of two elements, the question and the answer.
+
+Also uses a loop to cycle through the quesitons. Askss the questions and 
+compares the response from the player to the ansnwers in the array. 
+
+We use the prompt to ask the question and a conditional statement to see if the
+answer was guessed correctly. 
+-->
+<title>Quiz</title>
+</head>
+<body>
+
+
+</body>
+
+<script>
+	
+	var quiz = [
+	['What is my favorite color?', 'Blue'],
+	['What is my favorite ocean species?', 'Shark'],
+	['What is my favorite ice cream flavor?', 'Superman']
+	];	
+
+	var correct = 0;
+	var wrong = 0;
+	var question;
+	var answer;
+	var response;
+	var html;
+	
+	function print(message) {
+		document.write(message);
+	}
+
+	for(i=0; i < quiz.length; i+=1) {
+
+		question = quiz[i][0];
+		answer = quiz[i][1];
+
+		response = prompt(question);
+
+		if (response === answer) {
+		correct+=1;
+
+		}
+	}
+
+	html = "You got " + correct;
+	print(html);
+
+	
+
+</script>
+</html>
